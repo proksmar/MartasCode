@@ -11,10 +11,5 @@ namespace MartasCode
     {
         public int PostCode { get; set; }
         public string? Name { get; set; }
-
-       
-
-
-
     }
 }

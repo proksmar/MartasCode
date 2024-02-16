@@ -8,9 +8,9 @@ namespace MartasCode
 {
     internal class TownsDB 
     {
-     //přidat metodu kterou budeme přidávat do seznamu AddTown
-     //+ metodu, kterou budeme mazat
-     //pridat metody ktera bude vyhledavat podle nazvu mesta (i jenom jeho casti)
+     //1. přidat metodu kterou budeme přidávat do seznamu AddTown
+     //2. metodu, kterou budeme mazat
+     //3. pridat metody ktera bude vyhledavat podle nazvu mesta (i jenom jeho casti)
      
         public Town? GetTownByPostCode(int postCode)
         {
@@ -40,14 +40,43 @@ namespace MartasCode
             return town;*/
         }
 
-
-
-        private IList<Town> Towns = new List<Town>()
+        private IList<Town>Towns = new List<Town>()
         {
             new Town(){Name = "Ostrava", PostCode = 70800},
             new Town(){Name = "Ostravice", PostCode = 72569},
             new Town(){Name = "Opava", PostCode = 74601},
             new Town(){Name = "Brno", PostCode = 89011}
         };
+
+        public void AddTown(Town town)
+        {
+            Towns.Add(town);
+        }
+
+        //1.
+        public void RemoveTown(IList<Town>Towns, Town town)
+        {
+            if (town.PostCode == town.PostCode)
+            {
+                Towns.Remove(town);
+            }
+        }
+        //2.
+        public Town GetTown(Town town)
+        {
+            town.Name = town.Name;
+
+            return town;
+        }
+        //3.
+        public Town GetTownByPart(TownsDB Towns, Town town)
+        {
+            if (town.Name.Contains("*M*"))
+            {
+                return town;
+            }
+
+            return null;
+        }
     }
 }
