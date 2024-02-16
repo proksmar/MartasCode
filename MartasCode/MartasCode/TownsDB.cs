@@ -47,13 +47,13 @@ namespace MartasCode
             new Town(){Name = "Opava", PostCode = 74601},
             new Town(){Name = "Brno", PostCode = 89011}
         };
-
+        //1.
         public void AddTown(Town town)
         {
             Towns.Add(town);
         }
 
-        //1.
+        //2.
         public void RemoveTown(IList<Town>Towns, Town town)
         {
             if (town.PostCode == town.PostCode)
@@ -61,7 +61,7 @@ namespace MartasCode
                 Towns.Remove(town);
             }
         }
-        //2.
+        //Podle názvu města
         public Town GetTown(Town town)
         {
             town.Name = town.Name;
