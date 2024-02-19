@@ -8,18 +8,27 @@ namespace MartasCode
 {
     internal class TownsDB 
     {
-     //1. přidat metodu kterou budeme přidávat do seznamu AddTown
-     //2. metodu, kterou budeme mazat
-     //3. pridat metody ktera bude vyhledavat podle nazvu mesta (i jenom jeho casti)
-     
+        private List<Town> _towns = new List<Town>()
+        {
+            new Town(){Name = "Ostrava", PostCode = 70800},
+            new Town(){Name = "Ostravice", PostCode = 72569},
+            new Town(){Name = "Opava", PostCode = 74601},
+            new Town(){Name = "Brno", PostCode = 89011}
+        };
+
+
+        //1. přidat metodu kterou budeme přidávat do seznamu AddTown
+        //2. metodu, kterou budeme mazat
+        //3. pridat metody ktera bude vyhledavat podle nazvu mesta (i jenom jeho casti)
+
         public Town? GetTownByPostCode(int postCode)
         {
-            return Towns?.Where(town => town.PostCode == postCode).SingleOrDefault();
+            return _towns?.Where(town => town.PostCode == postCode).SingleOrDefault();
             //return Towns.SingleOrDefault(town => town.PostCode == postCode);
             //return Towns.FirstOrDefault(town => town.PostCode == postCode);
 
 
-            foreach (var town in Towns)
+            foreach (var town in _towns)
             {
                 if (town.PostCode == postCode)
                 {
@@ -31,7 +40,7 @@ namespace MartasCode
 
         public Town GetTownByPostCode2(int postCode)
         {
-            return Towns.Single(town => town.PostCode == postCode); //ověření, že v seznamu je jen jedno město s daným PSČ
+            return _towns.Single(town => town.PostCode == postCode); //ověření, že v seznamu je jen jedno město s daným PSČ
             /*var town = Towns.SingleOrDefault(town => town.PostCode == postCode);
             if (town == null)
             {
@@ -40,43 +49,43 @@ namespace MartasCode
             return town;*/
         }
 
-        private IList<Town>Towns = new List<Town>()
-        {
-            new Town(){Name = "Ostrava", PostCode = 70800},
-            new Town(){Name = "Ostravice", PostCode = 72569},
-            new Town(){Name = "Opava", PostCode = 74601},
-            new Town(){Name = "Brno", PostCode = 89011}
-        };
         //1.
-        public void AddTown(Town town)
+        public void AddTown(string name, int postcode)
         {
-            Towns.Add(town);
+            _towns.Add(new Town() {Name = name, PostCode = postcode});
         }
 
         //2.
-        public void RemoveTown(IList<Town>Towns, Town town)
+        public void RemoveTown(int postcode)
         {
-            if (town.PostCode == town.PostCode)
+            //pouzij _towns.RemoveAll(...)
+
+
+
+            //if (town.PostCode == town.PostCode)
             {
-                Towns.Remove(town);
+                //_towns.Remove(town);
             }
         }
-        //Podle názvu města
-        public Town GetTown(Town town)
-        {
-            town.Name = town.Name;
 
-            return town;
-        }
         //3.
-        public Town GetTownByPart(TownsDB Towns, Town town)
+        public IList<Town> SearchTown(string name)
         {
-            if (town.Name.Contains("*M*"))
-            {
-                return town;
-            }
+            //pouzij Where
 
-            return null;
+
+
+            //if (town.Name.Contains("*M*"))
+            //{
+            //    return town;
+            //}
+
+            return new List<Town>();
+        }
+
+        internal IList<Town> GetAll()
+        {
+            return _towns;
         }
     }
 }
