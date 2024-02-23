@@ -1,30 +1,76 @@
-﻿namespace OOPExample;
+﻿using Microsoft.VisualBasic.CompilerServices;
+
+namespace OOPExample;
+
+
+internal class MyArray
+{
+    private int[] array = new int[] { };
+    private int arrayLength = 0;
+
+    public void AddItemToArray(int newItem)
+    {
+        int newArrayLength = arrayLength + 1;
+        var newArray = new int[newArrayLength];
+
+        for (int i = 0; i < arrayLength; i++)
+        {
+            newArray[i] = array[i];
+        }
+
+        newArray[newArrayLength - 1] = newItem;
+
+        array = newArray;
+        arrayLength = newArrayLength;
+    }
+
+    public int GetItemAtIndex(int index)
+    {
+        if (index >= arrayLength)
+        {
+            throw new ArgumentException("Hodnota indexu je vetsi nez delka pole");
+        }
+
+        return array[index];
+    }
+
+    public bool TryGetItemAtIndex(int index, out int value)
+    {
+        if (index >= arrayLength)
+        {
+            value = 0;
+            return false;
+        }
+
+        value = array[index];
+        return true;
+    }
+}
+
+
+
+
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        int[] myNumbersArray = new int[]{};
-        int myNumbersArrayLength = 0;
+        var myArray1 = new MyArray();
+        var myArray2 = new MyArray();
 
-        AddItemToArray(ref myNumbersArray, ref myNumbersArrayLength, 10);
-        AddItemToArray(ref myNumbersArray, ref myNumbersArrayLength, 20);
-        AddItemToArray(ref myNumbersArray, ref myNumbersArrayLength, 30);
-    }
+        myArray1.AddItemToArray(10);
+        myArray1.AddItemToArray(20);
+        myArray1.AddItemToArray(30);
+        myArray1.AddItemToArray(40);
 
-    static void AddItemToArray(ref int[] array, ref int arrayLength, int newItem)
-    {
-        int newNumbersArrayLength = arrayLength + 1;
-        var newNumbersArray = new int[newNumbersArrayLength];
 
-        for (int i = 0; i < arrayLength; i++)
+        if (myArray1.TryGetItemAtIndex(2, out var x1))
         {
-            newNumbersArray[i] = array[i];
+            Console.WriteLine(x1);
         }
 
-        newNumbersArray[newNumbersArrayLength-1] = newItem;
+        var x2 = myArray1.GetItemAtIndex(40);
 
-        array = newNumbersArray;
-        arrayLength = newNumbersArrayLength;
+        myArray2.AddItemToArray(11);
     }
 }
