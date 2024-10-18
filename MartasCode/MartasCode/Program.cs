@@ -50,3 +50,46 @@ Console.WriteLine("\r\nKontrola metody AssertCountOfTownsDB");
 townsDb.AssertIsEmpty();
 Console.WriteLine("\r\nList je prázdný");
 Console.WriteLine();
+
+{
+    var seznam = new List<X>() { new X("A"), new X("B"), new X("C") };
+    var seznam2 = new List<string>() { "A", "B","C" };
+
+    var iEnumerable = seznam.AsEnumerable();
+
+    var enumerator = iEnumerable.GetEnumerator();
+
+    enumerator.Reset();//resetuje enumerator na zacatek
+    while (enumerator.MoveNext())
+    {
+        var sss = enumerator.Current; //vraci akutalni polozku na seznamu
+        enumerator.Current.Name = enumerator.Current.Name + "X"; //nastavi novou hodnotu na seznamu
+        Console.WriteLine(sss);
+    }
+
+    
+
+    foreach (var sss in seznam2)
+    {
+        seznam2[2] = "XXXX";
+
+        Console.WriteLine(sss);
+    }
+
+    //enumerator.MoveNext();//posouva se na dalsi polozku (prvni)
+    //var ss1 = enumerator.Current; //vraci akutalni polozku na seznamu
+    //enumerator.MoveNext();//posouva se na dalsi polozku (druha
+    //var ss2 = enumerator.Current; //vraci akutalni polozku na seznamu
+    //enumerator.MoveNext();//posouva se na dalsi polozku (druha
+    //var ss3 = enumerator.Current; //vraci akutalni polozku na seznamu
+    //enumerator.MoveNext();//posouva se na dalsi polozku (druha
+    //var ss4 = enumerator.Current; //vraci akutalni polozku na seznamu
+
+
+    enumerator.Dispose();
+
+}
+
+
+
+Console.WriteLine("Hotovo");
