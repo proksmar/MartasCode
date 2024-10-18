@@ -12,4 +12,10 @@ namespace MartasCode
         public int PostCode { get; set; }
         public string? Name { get; set; }
     }
+
+    internal class House
+    {
+        public int HouseNumber { get; set; }
+        public string Street { get; set; }
+    }
 }

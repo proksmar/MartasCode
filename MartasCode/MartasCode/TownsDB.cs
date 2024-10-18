@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MartasCode
 {
-    internal class TownsDB 
+    internal class TownsDB
     {
+
         private List<Town> _towns = new List<Town>()
         {
             new Town(){Name = "Ostrava", PostCode = 70800},
@@ -52,35 +54,46 @@ namespace MartasCode
         //1.
         public void AddTown(string name, int postcode)
         {
-            _towns.Add(new Town() {Name = name, PostCode = postcode});
+            _towns.Add(new Town() { Name = name, PostCode = postcode });
         }
 
-        //2.
-        public void RemoveTown(int postcode)
+        //2. according postecode
+        public void RemoveTown(int postcode, Town town)
         {
             //pouzij _towns.RemoveAll(...)
 
 
-
-            //if (town.PostCode == town.PostCode)
+            if (postcode == town.PostCode)
             {
-                //_towns.Remove(town);
+                _towns.Remove(town);
+            }
+            else { Console.WriteLine("Máš to blbě"); }
+        }
+
+        public void RemoveAll()
+        {
+            //not possible use foreach fot remove items
+            while (_towns.Count > 0)
+            {
+                _towns.RemoveAt(0);
+            }
+        }
+
+        public void AssertIsEmpty()
+        {
+            //remove before Assert
+            if (_towns.Count > 0)
+            {
+                throw new InvalidOperationException("List of towns is not empty");
             }
         }
 
         //3.
-        public IList<Town> SearchTown(string name)
+        public IList<Town> SearchTown(string x)
         {
-            //pouzij Where
+            var my = _towns.FindAll(town => town.Name.Contains(x)).ToList();
 
-
-
-            //if (town.Name.Contains("*M*"))
-            //{
-            //    return town;
-            //}
-
-            return new List<Town>();
+            return my;
         }
 
         internal IList<Town> GetAll()
